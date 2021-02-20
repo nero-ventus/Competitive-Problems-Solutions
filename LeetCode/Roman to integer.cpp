@@ -1,239 +1,30 @@
 class Solution {
 public:
+    
+    int letterToInt(char c){
+        if(c=='I') return 1;
+        if(c=='V') return 5;
+        if(c=='X') return 10;
+        if(c=='L') return 50;
+        if(c=='C') return 100;
+        if(c=='D') return 500;
+        return 1000;
+    }
+    
     int romanToInt(string s) {
-        int nume=0;
-        vector<int> partes;
+        int res=0, aux, aux2;
         for(int i=0; i<s.size(); i++){
-            if(s.at(i)=='I'){
-                partes.push_back(1);
+            aux=letterToInt(s[i]);
+            if(i+1<s.size()){
+                aux2=letterToInt(s[i+1]);
+                if(aux2>aux){
+                    res+=aux2-aux;
+                    i++;
+                }
+                else res+=aux;
             }
-            if(s.at(i)=='V'){
-                partes.push_back(5);
-            }
-            if(s.at(i)=='X'){
-                partes.push_back(10);
-            }
-            if(s.at(i)=='L'){
-                partes.push_back(50);
-            }
-            if(s.at(i)=='C'){
-                partes.push_back(100);
-            }
-            if(s.at(i)=='D'){
-                partes.push_back(500);
-            }
-            if(s.at(i)=='M'){
-                partes.push_back(1000);
-            }
+            else res+=aux;
         }
-        int aux=0;
-        for(int i=0; i<partes.size(); i++){
-            if(aux==0){
-                if(partes[i]==1){
-                    nume+=partes[i];
-                    aux=1;
-                }
-                if(partes[i]==5){
-                    nume+=partes[i];
-                    aux=5;
-                }
-                if(partes[i]==10){
-                    nume+=partes[i];
-                    aux=10;
-                }
-                if(partes[i]==50){
-                    nume+=partes[i];
-                    aux=50;
-                }
-                if(partes[i]==100){
-                    nume+=partes[i];
-                    aux=100;
-                }
-                if(partes[i]==500){
-                    nume+=partes[i];
-                    aux=500;
-                }
-                if(partes[i]==1000){
-                    nume+=partes[i];
-                    aux=1000;
-                }
-            }
-            else{
-                if(aux==1){
-                    if(partes[i]==1 or partes[i]==5 or partes[i]==10){
-                        if(partes[i]==1){
-                            nume+=1;
-                            aux=1;
-                        }
-                        if(partes[i]==5){
-                            nume+=3;
-                            aux=0;
-                        }
-                        if(partes[i]==10){
-                            nume+=8;
-                            aux=0;
-                        }
-                    }
-                    else{
-                        aux=0;
-                        i--;
-                    }
-                }
-                if(aux==5){
-                    if(partes[i]==1){
-                        nume+=1;
-                    }
-                    else{
-                        aux=0;
-                        i--;
-                    }
-                }
-                if(aux==10){
-                    if(partes[i]==1 or partes[i]==5 or partes[i]==10 or partes[i]==50 or partes[i]==100){
-                        if(partes[i]==1){
-                            nume+=1;
-                            aux=1;
-                        }
-                        if(partes[i]==5){
-                            nume+=5;
-                            aux=5;
-                        }
-                        if(partes[i]==10){
-                            nume+=10;
-                        }
-                        if(partes[i]==50){
-                            nume+=30;
-                            aux=0;
-                        }
-                        if(partes[i]==100){
-                            nume+=80;
-                            aux=0;
-                        }
-                    }
-                    else{
-                        aux=0;
-                        i--;
-                    }
-                }
-                if(aux==50){
-                    if(partes[i]==1 or partes[i]==5 or partes[i]==10){
-                        if(partes[i]==1){
-                            nume+=1;
-                            aux=1;
-                        }
-                        if(partes[i]==5){
-                            nume+=5;
-                            aux=5;
-                        }
-                        if(partes[i]==10){
-                            nume+=10;
-                            aux=10;
-                        }
-                    }
-                    else{
-                        aux=0;
-                        i--;
-                    }
-                }
-                if(aux==100){
-                    if(partes[i]==1 or partes[i]==5 or partes[i]==10 or partes[i]==50 or partes[i]==100 or partes[i]==500 or partes[i]==1000){
-                        if(partes[i]==1){
-                            nume+=1;
-                            aux=1;
-                        }
-                        if(partes[i]==5){
-                            nume+=5;
-                            aux=5;
-                        }
-                        if(partes[i]==10){
-                            nume+=10;
-                            aux=10;
-                        }
-                        if(partes[i]==50){
-                            nume+=50;
-                            aux=50;
-                        }
-                        if(partes[i]==100){
-                            nume+=100;
-                        }
-                        if(partes[i]==500){
-                            nume+=300;
-                            aux=0;
-                        }
-                        if(partes[i]==1000){
-                            nume+=800;
-                            aux=0;
-                        }
-                    }
-                    else{
-                        aux=0;
-                        i--;
-                    }
-                }
-                if(aux==500){
-                    if(partes[i]==1 or partes[i]==5 or partes[i]==10 or partes[i]==50 or partes[i]==100){
-                        if(partes[i]==1){
-                            nume+=1;
-                            aux=1;
-                        }
-                        if(partes[i]==5){
-                            nume+=5;
-                            aux=5;
-                        }
-                        if(partes[i]==10){
-                            nume+=10;
-                            aux=10;
-                        }
-                        if(partes[i]==50){
-                            nume+=50;
-                            aux=50;
-                        }
-                        if(partes[i]==100){
-                            nume+=100;
-                        }
-                    }
-                    else{
-                        aux=0;
-                        i--;
-                    }
-                }
-                if(aux==1000){
-                    if(partes[i]==1 or partes[i]==5 or partes[i]==10 or partes[i]==50 or partes[i]==100 or partes[i]==500 or partes[i]==1000){
-                        if(partes[i]==1){
-                            nume+=1;
-                            aux=1;
-                        }
-                        if(partes[i]==5){
-                            nume+=5;
-                            aux=5;
-                        }
-                        if(partes[i]==10){
-                            nume+=10;
-                            aux=10;
-                        }
-                        if(partes[i]==50){
-                            nume+=50;
-                            aux=50;
-                        }
-                        if(partes[i]==100){
-                            nume+=100;
-                            aux=100;
-                        }
-                        if(partes[i]==500){
-                            nume+=500;
-                            aux=500;
-                        }
-                        if(partes[i]==1000){
-                            nume+=1000;
-                        }
-                    }
-                    else{
-                        aux=0;
-                        i--;
-                    }
-                }
-            }
-        }
-        return nume;
+        return res;
     }
 };
